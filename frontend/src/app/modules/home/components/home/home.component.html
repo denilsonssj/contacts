@@ -1,0 +1,102 @@
+<div class="home">
+    <h1 class="title">Agenda de contatos</h1>
+    <div class="div">
+        <h2 class="subtitle">Contatos cadastrados</h2>
+        <button
+            class="button button-primary button-new"
+            (click)="onNewClick()"
+        >
+            <fa-icon [icon]="icons.faPlus"></fa-icon>
+            Novo
+        </button>
+    </div>
+    <div *ngIf="!!(persons$ | async)?.length && (persons$ | async) as persons; else userEmpty">
+        <div *ngFor="let person of persons" class="card">
+            <section class="info-1">
+                <div class="img-container">
+                    <img
+                        [src]="'data:image/png;base64,' + person.photoUrl"
+                        [alt]="person.fullName"
+                        class="img"
+                    />
+                </div>
+                <div class="info">
+                    <div class="info-a">
+                        <span class="info-accent">Nome:</span>
+                        {{person.fullName}}
+                    </div>
+                    <div class="info-a">
+                        <span class="info-accent">E-mail:</span>
+                        {{person.email}}
+                    </div>
+                    <div class="info-a">
+                        <span class="info-accent">Telefone:</span>
+                        {{person.phone | mask: '(00) 0 0000 0000'}}
+                    </div>
+                    <div class="info-a">
+                        <span class="info-accent">Data de nascimento:</span>
+                        {{ person.birth | date: 'dd/MM/yyyy' }}
+                    </div>
+                </div>
+            </section>
+            <div class="actions">
+                <button
+                    class="button button-warning button-actions"
+                    (click)="onEditButtonClick(person)"
+                >
+                    <fa-icon [icon]="icons.faEdit"></fa-icon>
+                    Editar
+                </button>
+                <button
+                    type="button"
+                    class="button button-danger button-actions"
+                    (click)="onDeleteClick(person)"
+                >
+                    <fa-icon [icon]="icons.faTrash"></fa-icon>
+                    Excluir
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #userEmpty>
+    <div class="list-empty">
+        <img
+            src="assets/images/undraw_online_re_x00h.svg"
+            height="300px"
+            alt=""
+            class="empty-list-image"
+        >
+        <h1 class="list-empty-title">
+            Sua lista de contatos está vazia!
+        </h1>
+        <p class="persons-empty-message">
+            Por favor adicione novos contatos a sua lista!
+        </p>
+    </div>
+</ng-template>
+
+<app-new-person
+    [showModal]="showCreatePersonModal"
+    (sendMessage)="onCreatePerson()"
+>
+</app-new-person>
+
+<app-edit-person
+    *ngIf="showEditPersonModal"
+    [showModal]="showEditPersonModal"
+    (sendMessage)="onEditPerson()"
+    [person]="selectedPerson"
+>
+</app-edit-person>
+
+<app-delete-person
+    *ngIf="showDeletePersonModal && selectedPerson"
+    [showModal]="showDeletePersonModal"
+    [personId]="selectedPerson.id"
+    (onCompleteOperation)="onDeletePerson(selectedPerson.id)"
+    (onCancelOperation)="onCancelDeleteOperation()"
+>
+</app-delete-person>
+

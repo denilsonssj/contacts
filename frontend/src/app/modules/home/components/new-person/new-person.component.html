@@ -1,0 +1,158 @@
+<ng-container *ngIf="showModal">
+    <div class="overlay"></div>
+    <div class="modal">
+        <div class="modal-header">
+            <fa-icon
+                [icon]="icons.faClose"
+                class="close-icon"
+                (click)="onClose()"
+            >
+            </fa-icon>
+        </div>
+        <div class="modal-body">
+            <form
+                [formGroup]="form"
+                (submit)="onSubmit()"
+                class="form"
+            >
+                <h2 class="form-title">Novo contato</h2>
+                <div class="input-group">
+                    <label for="" class="form-label">
+                        Nome:
+                        <span class="required-flag">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        class="form-input"
+                        formControlName="fullName"
+                    />
+                    <app-error-message
+                        *ngIf="
+                            form.get('fullName')?.errors?.['required']
+                            && !!form.get('fullName')?.dirty"
+                        [message]="'O campo é obrigatório'"
+                    >
+                    </app-error-message>
+                    <app-error-message
+                        *ngIf="form.get('fullName')?.errors?.['minlength']"
+                        [message]="'Tamanho mínimo é requerido!'"
+                    >
+                    </app-error-message>
+                </div>
+                <div class="input-group">
+                    <label for="email" class="form-label">
+                        Email:
+                        <span class="required-flag">*</span>
+                    </label>
+                    <input
+                        type="email"
+                        class="form-input"
+                        formControlName="email"
+                    />
+                    <app-error-message
+                        *ngIf="
+                            form.get('email')?.errors?.['required']
+                            && !!form.get('email')?.dirty"
+                        [message]="'O campo é obrigatório'"
+                    >
+                    </app-error-message>
+                    <app-error-message
+                        *ngIf="form.get('email')?.errors?.['email']"
+                        [message]="'O campo deve ser um e-mail válido!'"
+                    >
+                    </app-error-message>
+                </div>
+                <div class="input-group">
+                    <label for="" class="form-label">
+                        Telefone:
+                        <span class="required-flag">*</span>
+                    </label>
+                    <input
+                        type="text"
+                        class="form-input"
+                        formControlName="phone"
+                        mask="(00) 0 0000 0000"
+                        placeholder="(00) 0 0000 0000"
+                    >
+                    <app-error-message
+                        *ngIf="form.get('phone')?.errors?.['required']
+                            && !!form.get('phone')?.dirty"
+                        [message]="'O campo é obrigatório!'"
+                    >
+                    </app-error-message>
+                    <app-error-message
+                        *ngIf="form.get('phone')?.errors?.['minlength']
+                            && !!form.get('phone')?.dirty"
+                        [message]="'Campo deve ter 11 dígitos!'"
+                    >
+                    </app-error-message>
+                </div>
+                <div class="input-group">
+                    <label
+                        for="date"
+                        class="form-label"
+                        >
+                        Data de nascimento:
+                        <span class="required-flag">*</span>
+                    </label>
+                    <input
+                        name="date"
+                        type="date"
+                        class="form-input form-input-date"
+                        formControlName="birth"
+                    >
+                    <app-error-message
+                        *ngIf="form.get('birth')?.errors?.['required']
+                            && !!form.get('birth')?.dirty"
+                        [message]="'O campo é obrigatório!'"
+                    >
+                    </app-error-message>
+                </div>
+                <div class="input-group">
+                    <label for="filePhoto" class="form-label">
+                        Foto:
+                        <span class="required-flag">*</span>
+                    </label>
+                    <input
+                        type="file"
+                        name="filePhoto"
+                        class="form-input"
+                        (change)="onFileChange($event)"
+                    >
+                    <app-error-message
+                            *ngIf="form.get('filePhoto')?.errors?.['required']
+                                && !!form.get('filePhoto')?.dirty"
+                            [message]="'O campo é obrigatório!'"
+                        >
+                    </app-error-message>
+                </div>
+                <div class="modal-footer">
+                    <button
+                        type="submit"
+                        class="button button-primary button-submit"
+                    >
+                        <fa-icon
+                            [icon]="icons.faSave"
+                            class="close-icon"
+                        >
+                        </fa-icon>
+                        Salvar
+                    </button>
+                    <button
+                        type="button"
+                        class="button button-danger button-cancel"
+                        (click)="onClose()"
+                    >
+                        <fa-icon
+                            [icon]="icons.faCancel"
+                            class="close-icon"
+                        >
+                        </fa-icon>
+                        Cancelar
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</ng-container>
+

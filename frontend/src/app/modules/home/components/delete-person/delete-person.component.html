@@ -1,0 +1,44 @@
+<ng-container *ngIf="!!showModal">
+    <div class="overlay"></div>
+    <div class="modal">
+        <div class="modal-header">
+            <fa-icon
+                [icon]="icons.faClose"
+                class="close-icon"
+                (click)="onCancel()"
+            >
+            </fa-icon>
+        </div>
+        <div class="modal-body">
+            <p class="confirm-message">
+                Tem certeza que deseja excluir o usuário selecionado?
+            </p>
+        </div>
+        <div class="modal-footer">
+            <button
+                type="submit"
+                class="button button-primary button-submit"
+                (click)="onDelete()"
+            >
+                <fa-icon
+                    [icon]="icons.faSave"
+                    class="close-icon"
+                >
+                </fa-icon>
+                Excluir
+            </button>
+            <button
+                type="button"
+                class="button button-danger button-cancel"
+                (click)="onCancel()"
+            >
+                <fa-icon
+                    [icon]="icons.faCancel"
+                    class="close-icon"
+                >
+                </fa-icon>
+                Cancelar
+            </button>
+        </div>
+    </div>
+</ng-container>

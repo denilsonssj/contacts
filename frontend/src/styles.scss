@@ -1,0 +1,89 @@
+$primary-color: #1d73ac;
+
+:root{
+  --data-color-primary: #1d73ac;
+  --data-background-color: #151719;
+}
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height: 100vh;
+    width: 100vw;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    background-color: #151719; //dark
+}
+
+.button {
+    padding: 4px 8px;
+    margin: 2px;
+    outline: none;
+    border: 1px solid black;
+    border-radius: 4px;
+}
+
+.button-primary {
+    background-color: var(--data-color-primary);
+    border: 1px solid #1d73ac;
+    color: #FFF;
+}
+
+.button-primary:hover {
+    opacity: 0.9;
+    border: 1px solid #2471a5;
+}
+
+.button-primary:focus {
+    outline: 1px solid #FFF;
+}
+
+.button-accent {
+    background-color: #182747;
+    border: 1px solid #182747;
+    color: #FFF;
+}
+
+.button-accent:hover {
+    opacity: 0.9;
+    border: 1px solid #2471a5;
+}
+
+.button-accent:focus {
+    outline: 1px solid #FFF;
+}
+
+.button-warning {
+    background-color: #D07000;
+    border: 1px solid #D07000;
+    color: #FFF;
+}
+
+
+.button-warning:hover {
+    opacity: 0.9;
+}
+
+.button-warning:focus {
+    outline: 1px solid #FFF;
+}
+
+
+.button-danger {
+    background-color: #C21010;
+    border: 1px solid #C21010;
+    color: #FFF;
+}
+
+.button-danger:hover {
+    opacity: 0.9;
+}
+
+.button-danger:focus {
+    outline: 1px solid #FFF;
+}
